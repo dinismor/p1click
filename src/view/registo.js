@@ -2,6 +2,7 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import "bootstrap/dist/css/website.css";
+import navbar_render from "./navbar_render";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { BsChevronLeft } from "react-icons/bs"; //ICON BOTÃO VOLTAR
@@ -14,27 +15,19 @@ class Registar extends React.Component {
       campapelido: "",
       campemail: "",
       campdatanasc: "",
-      camppassword: "",
       camplocalidade: "",
       campcodigopostal: "",
       camptelefone: 0,
       campprioritario: 0,
       campautonomo: 0,
       campnutentesaude: 0,
+      camppassword: "",
     };
   }
   render() {
     return (
       <div>
-        <Link
-          type="button"
-          id="btn_submit_bt"
-          class="btn btn-outline-primary"
-          to="../login"
-        >
-          <BsChevronLeft />
-          &nbsp;Voltar
-        </Link>
+        {navbar_render.loadNav()}
         {/* Registar */}
         <div className="container">
           <div className="row">
@@ -184,7 +177,7 @@ class Registar extends React.Component {
                 <div className="form-group">
                   <label htmlFor="nome">Palavra-passe</label>
                   <input
-                    type="text"
+                    type="password"
                     className="form-control"
                     placeholder="********"
                     id="pass"
@@ -197,7 +190,7 @@ class Registar extends React.Component {
                 <div className="form-group">
                   <label htmlFor="nome">Confirmar Palavra-passe</label>
                   <input
-                    type="text"
+                    type="password"
                     className="form-control"
                     placeholder="********"
                     id="cpass"
@@ -265,14 +258,14 @@ class Registar extends React.Component {
         nome: this.state.campnome,
         apelido: this.state.campapelido,
         email: this.state.campemail,
-        password: this.state.camppassword,
-        data_nascimento: this.state.campcodigopostal,
+        data_nascimento: this.state.campdatanasc,
         localidade: this.state.camplocalidade,
         codigo_postal: this.state.campcodigopostal,
         telefone: this.state.camptelefone,
         prioritario: this.state.campprioritario,
         autonomo: this.state.campautonomo,
-        nutentesaude: this.state.campnutentesaude,
+        n_utente_saude: this.state.campnutentesaude,
+        palavra_passe: this.state.camppassword,
       };
       axios
         .post(baseUrl, datapost)

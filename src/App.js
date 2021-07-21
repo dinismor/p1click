@@ -30,6 +30,18 @@ import AdminListarConsultas from "./view/admin_listar_consultas"; //IMPORTA VIEW
 import AdminMarcarConsulta from "./view/admin_marcar_consulta"; //IMPORTA VIEW PAGINA ADMIN DE MARCAR CONSULTAS
 import AdminEndConsulta from "./view/admin_end_consulta"; //IMPORTA VIEW PAGINA ADMIN DE CONCLUSÃO E VISUALIZAÇÃO DE CONSULTAS
 import AdminListaUtentes from "./view/admin_lista_utentes"; //IMPORTA VIEW PAGINA ADMIN DE LISTAR UTENTES
+import AdminUtenteEdit from "./view/admin_editar_utente"; 
+import AdminUtentes from "./view/admin_utentes";
+import QRCode from "./view/qrcode";
+import Adminicial from "./view/admin_inicial";
+import Senha from "./view/senha";
+import Administrador from "./view/Administrador";
+import Atrasos from "./view/Atrasos";
+import Consultas from "./view/Media";
+import Afluencia from "./view/Afluencia";
+import Desistencias from "./view/Desistencias6";
+import Temporarias from "./view/Temporarias2";
+
 
 class App extends React.Component {
   constructor(props) {
@@ -41,74 +53,14 @@ class App extends React.Component {
   logOut() {
     AuthService.logout();
   }
-
+  
   render() {
     const { currentUser } = this.state;
 
     return (
       <Router>
         <div className="App">
-          {/* Navbar */}
-          <nav className="navbar navbar-expand-lg navbar-light bg-light csNav">
-            <a className="navbar-brand" href="#">
-              Centro de Saúde <p className="p_nav">Sátão</p>
-            </a>
-            <button
-              className="navbar-toggler"
-              type="button"
-              data-toggle="collapse"
-              data-target="#navbarSupportedContent"
-              aria-controls="navbarSupportedContent"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
-              <span className="navbar-toggler-icon" />
-            </button>
-            <div
-              className="collapse navbar-collapse"
-              id="navbarSupportedContent"
-            >
-              <ul className="navbar-nav ml-auto">
-                <li className="nav-item active">
-                  <Link class="nav-link" to="../">
-                    {" "}
-                    {/* COLOCAR HOME */}
-                    Inicio
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link class="nav-link" to="../menu_consultas">
-                    Marcações
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link class="nav-link" to="../perfil_utente">
-                    Perfil
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link class="nav-link" to="../sobre">
-                    Sobre
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link class="nav-link" to="../contactos">
-                    Contactos
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link
-                    class="nav-link"
-                    to="../admin_lista_consulta_edit_delete"
-                  >
-                    {" "}
-                    {/* TESTE PARA ADMIN  E APARECE LOGO ESSA PÁGINA */}
-                    Sair
-                  </Link>
-                </li>
-              </ul>
-            </div>
-          </nav>
+        
           {/* Navbar */}
           <Switch>
             <Route path="/" exact component={Login} />
@@ -131,7 +83,7 @@ class App extends React.Component {
               component={AdminConsultaEditDelete}
             />
             <Route
-              path="/admin_editar_consulta"
+              path="/admin_editar_consulta/:id"
               component={AdminConsultaEdit}
             />
             <Route
@@ -144,6 +96,22 @@ class App extends React.Component {
             />
             <Route path="/admin_end_consulta" component={AdminEndConsulta} />
             <Route path="/admin_lista_utentes" component={AdminListaUtentes} />
+            <Route path="/qrcode" component={QRCode}/>  
+            <Route path="/admin_utentes" component={AdminUtentes}/>  
+          <Route path="/admin_editar_utente/:id"component={AdminUtenteEdit}/>
+          <Route path="/admin_inicial"component={Adminicial}/>
+          <Route path="/senha"component={Senha}/>
+          <Route path="/Administrador"component={Administrador}/>
+
+          <Route path="/atrasos" component={Atrasos} />
+            <Route path="/consultas" component={Consultas} />
+            <Route path="/afluencia" component={Afluencia} />
+            <Route path="/temporarias" component={Temporarias} />
+            <Route path="/desistencias" component={Desistencias} />
+           
+            <Route path="/medico_sair" component={Login} />
+            
+            
           </Switch>
         </div>
       </Router>

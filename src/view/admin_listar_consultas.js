@@ -1,5 +1,4 @@
 import React from "react";
-//import MetaTags from "react-meta-tags";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import axios from "axios";
@@ -33,8 +32,6 @@ class AdminListarConsultas extends React.Component {
   render() {
     return (
       <div className="container-fluid tudo">
- 
-
         <div class="row">
           <aside className="aside_medico col-2 px-0 ">
             <p className="medico">
@@ -55,8 +52,7 @@ class AdminListarConsultas extends React.Component {
               <div className="box_selected_medico ">
                 <Link className="selected_medico" to={"/admin_lista_utentes"}>
                   Lista de Utentes
-                </Link>{" "}
-                {/* CLICAR DUAS VEZES PARA VER PÁGINA POR CAUSA DE PÁGINA TESTE NA NAVBAR SAIR */}
+                </Link>
               </div>
             </a>
 
@@ -75,8 +71,6 @@ class AdminListarConsultas extends React.Component {
             <a href="#">
               <div className="box_selection_medico">
                 <Link className="selection_medico" to={"/admin_end_consulta"}>
-                  {" "}
-                  {/* TESTE DE PÁGINA */}
                   Sair
                 </Link>
               </div>
@@ -109,7 +103,7 @@ class AdminListarConsultas extends React.Component {
               <BsChevronLeft />
               &nbsp;Voltar
             </Link>
-            <div className="shadow-sm_admin p-3 mb-5">15 minutos</div>{" "}
+            <div className="shadow-sm_admin p-3 mb-5">15 minutos</div>
             {/* ADICIONAR TEMPO DE ESPERA */}
             <table className="table table-striped">
               <thead className="table-light">
@@ -144,7 +138,7 @@ class AdminListarConsultas extends React.Component {
     return this.state.consulta_lista.map((data, index) => {
       return (
         <tr key={index}>
-          <td>{data.id_consulta}</td>
+          <td>{data.id}</td>
           <td>{data.tipo_consulta}</td>
           <td>{data.dia_consulta}</td>
         </tr>

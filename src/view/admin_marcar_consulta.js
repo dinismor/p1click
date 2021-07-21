@@ -14,16 +14,12 @@ class AdminMarcarConsulta extends React.Component {
       camptipo_consulta: "",
       camphora_consulta: 0,
       campdia_consulta: "",
-      camputente_prioritario: 0,
-      //campemail_temp: "",
-      //camptelefone_temp: 0,
+      camputente_prioritario: 0
     };
   }
   render() {
     return (
       <div className="container-fluid tudo">
- 
-
         <div class="row">
           <aside className="aside_medico col-2 px-0 ">
             <p className="medico">
@@ -41,14 +37,15 @@ class AdminMarcarConsulta extends React.Component {
               <div className="box_selection_medico ">
                 <Link className="selection_medico" to={"/admin_lista_utentes"}>
                   Lista de Utentes
-                </Link>{" "}
-                {/* CLICAR DUAS VEZES PARA VER PÁGINA POR CAUSA DE PÁGINA TESTE NA NAVBAR SAIR */}
+                </Link>
               </div>
             </a>
 
             <a href="#">
               <div className="box_selection_medico ">
-                <span className="selection_medico">Editar Utente</span>
+                <Link className="selection_medico" to={"/admin_utentes"}>
+                  Editar Utente
+                </Link>
               </div>
             </a>
 
@@ -60,10 +57,9 @@ class AdminMarcarConsulta extends React.Component {
 
             <a href="#">
               <div className="box_selection_medico">
-                <Link className="selection_medico" to={"/admin_end_consulta"}>
+                <Link className="selection_medico" to={"/medico_sair"}>
                   Sair
-                </Link>{" "}
-                {/* TESTE DE PÁGINA */}
+                </Link>
               </div>
             </a>
           </aside>
@@ -77,7 +73,11 @@ class AdminMarcarConsulta extends React.Component {
                 <div id="Sto_medico">
                   <span>Sátão</span>
                 </div>
-                <span className="administracao_medico">Administração</span>
+                <div className="administracao_medico">
+                  <Link className=" btn-info btn_lt" to={"/Administrador"}>
+                    Administrador
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
@@ -121,6 +121,7 @@ class AdminMarcarConsulta extends React.Component {
                   </div>
                   <br />
                   <div className="form-group">
+                    <label htmlFor="nome">Dia da Consulta</label>
                     <input
                       type="date"
                       id="data"
@@ -188,7 +189,10 @@ class AdminMarcarConsulta extends React.Component {
         <br></br>
         <br></br>
         {/* Footer */}
-        <footer className="bg-light text-center text-lg-start csFooter">
+        <footer
+          className="bg-light text-center text-lg-start csFooter"
+          id="barra_fundo_baixo"
+        >
           {/* Copyright */}
           <div className="text-light text-center p-3">
             powered by:

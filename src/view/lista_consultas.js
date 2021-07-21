@@ -1,6 +1,7 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
+import navbar_render from "./navbar_render";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { FaRegListAlt } from "react-icons/fa"; //ICON LISTA
@@ -33,23 +34,14 @@ class ListaConsultas extends React.Component {
   render() {
     return (
       <div>
-        <Link
-          type="button"
-          id="btn_submit_bt"
-          class="btn btn-outline-primary"
-          to="../menu_consultas"
-        >
-          <BsChevronLeft />
-          &nbsp;Voltar
-        </Link>
+        {navbar_render.loadNav()}
+        <br></br><br></br>
         <p className="p_history">
           <FaRegListAlt />
           &nbsp;Consultas
         </p>
-        <br></br>
-        <br></br>
-        <br></br>
-        <table className="table table-striped">
+        <br></br><br></br><br></br><br></br><br></br><br></br>
+        <table className="table table-striped" id="tabel_lista">
           <thead className="table-light">
             <tr>
               <th scope="col" className="tab">
@@ -89,7 +81,7 @@ class ListaConsultas extends React.Component {
     return this.state.consulta_lista.map((data, index) => {
       return (
         <tr key={index}>
-          <td>{data.id_consulta}</td>
+          <td>{data.id}</td>
           <td>{data.tipo_consulta}</td>
           <td>{data.dia_consulta}</td>
           <td>{data.hora_consulta}</td>

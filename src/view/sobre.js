@@ -2,13 +2,15 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import "bootstrap/dist/css/website.css";
+import navbar_render from "./navbar_render";
 import { BiMap } from "react-icons/bi"; //ICON HISTORICO
+import { Link } from "react-router-dom";
 
 class Sobre extends React.Component {
   render() {
     return (
       <div>
-        {/*ELIMINAR NAVBAR PARA NAO DUPLICAR AO INTERAGIR*/}
+        {navbar_render.loadNav()}
         {/* Formulário */}
         <div>
           <img src="img/Sobre.jpg" className="imagem_sobre" alt="Sobre" />
@@ -37,7 +39,7 @@ class Sobre extends React.Component {
               loading="lazy"
             />
           </div>{" "}
-          {/*GOOGLE MAPS COM LOCALIZAÇÃO DO CENTRO DE SAUDEA*/}
+          {/*GOOGLE MAPS COM LOCALIZAÇÃO DO CENTRO DE SAUDE*/}
         </div>
         <br></br>
         {/* Footer */}

@@ -1,6 +1,7 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
+import navbar_render from "./navbar_render";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { FaHistory } from "react-icons/fa"; //ICON HISTORICO
@@ -33,27 +34,21 @@ class Historico extends React.Component {
   render() {
     return (
       <div>
-        <Link
-          type="button"
-          id="btn_submit_bt"
-          class="btn btn-outline-primary"
-          to="../menu_consultas"
-        >
-          <BsChevronLeft />
-          &nbsp;Voltar
-        </Link>
+        {navbar_render.loadNav()}
+        <br></br>
+        <br></br>
         <p className="p_history">
-          <FaHistory />
+          <FaHistory/>
           &nbsp;Histórico de Consultas
         </p>
         <br></br>
         <br></br>
         <br></br>
-        <table className="table table-striped">
+        <table className="table table-striped" id="tabel_lista">
           <thead className="table-light">
             <tr>
               <th scope="col" className="tab">
-                <FaHistory />
+                <FaHistory/>
               </th>
               <th scope="col" className="tab">
                 ID
@@ -95,7 +90,7 @@ class Historico extends React.Component {
           <td>
             <FaHistory />
           </td>
-          <td>{data.id_consulta}</td>
+          <td>{data.id}</td>
           <td>{data.tipo_consulta}</td>
           <td>{data.dia_consulta}</td>
           <td>{data.hora_consulta}</td>

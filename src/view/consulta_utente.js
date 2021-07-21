@@ -2,6 +2,7 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import "bootstrap/dist/css/website.css";
+import navbar_render from "./navbar_render";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { BsChevronLeft } from "react-icons/bs"; //ICON BOTÃO VOLTAR
@@ -22,21 +23,11 @@ class ConsultaUtente extends React.Component {
   render() {
     return (
       <div>
-        {/*ELIMINAR NAVBAR PARA NAO DUPLICAR AO INTERAGIR*/}
-        {/* Formulário marcar consulta */}
-        <Link
-          type="button"
-          id="btn_submit_bt"
-          class="btn btn-primary"
-          to="../menu_consultas"
-        >
-          <BsChevronLeft />
-          &nbsp;Voltar
-        </Link>
+        {navbar_render.loadNav()}
         <div className="container-utente">
           <div className="shadow p-3 mb-5 bg-white rounded">
             <img src="img/icon_utente.png" className="rounded" alt="Utente" />
-            <p>José Pinheiro</p>
+            <p>Utente</p>
           </div>
         </div>
         <div className="container">
@@ -74,6 +65,7 @@ class ConsultaUtente extends React.Component {
                 </div>
                 <br />
                 <div className="form-group">
+                  <label htmlFor="nome">Dia da Consulta</label>
                   <input
                     type="date"
                     id="data"
@@ -135,7 +127,6 @@ class ConsultaUtente extends React.Component {
           </div>
         </div>
         <br></br>
-        {/* Footer */}
         <footer className="bg-light text-center text-lg-start csFooter">
           {/* Copyright */}
           <div className="text-light text-center p-3">
@@ -146,7 +137,6 @@ class ConsultaUtente extends React.Component {
           </div>
           {/* Copyright */}
         </footer>
-        {/* Footer */}
       </div>
     );
   }

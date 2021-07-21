@@ -2,6 +2,7 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import "bootstrap/dist/css/website.css";
+import navbar_render from "./navbar_render";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { BsChevronLeft } from "react-icons/bs"; //ICON BOTÃO VOLTAR
@@ -22,15 +23,7 @@ class ConsultaTemporaria extends React.Component {
   render() {
     return (
       <div>
-        <Link
-          type="button"
-          id="btn_submit_bt"
-          class="btn btn-outline-primary"
-          to="../login"
-        >
-          <BsChevronLeft />
-          &nbsp;Voltar
-        </Link>
+        {navbar_render.loadNav()}
         <br></br>
         <div className="container-utente">
           <div className="shadow p-3 mb-5 bg-white rounded">
@@ -169,7 +162,6 @@ class ConsultaTemporaria extends React.Component {
         </div>
         <br></br>
         <br></br>
-        {/* Footer */}
         <footer className="bg-light text-center text-lg-start csFooter">
           {/* Copyright */}
           <div className="text-light text-center p-3">

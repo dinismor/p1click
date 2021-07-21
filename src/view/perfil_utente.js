@@ -3,12 +3,57 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import "bootstrap/dist/css/website.css";
 import { Link } from "react-router-dom";
+import navbar_render from "./navbar_render";
+
+import axios from "axios";
 
 class PerfilUtente extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      utente_lista: [],
+    };
+  }
+  componentDidMount() {
+    this.loadUtente();
+  }
+
+  loadUtente() {
+    const url = "http://localhost:3000/utente/list_utente";
+    axios
+      .get(url)
+      .then((res) => {
+        if (res.data.success) {
+          const data = res.data.data;
+          this.setState({ utente_lista: data });
+        } else {
+          alert("Error Web Service!");
+        }
+      })
+      .catch((error) => {
+        alert(error);
+      });
+  }
+
+  loadFillData() {
+    return this.state.utente_lista.map((data, index) => {
+      return (
+        <Link
+          type="button"
+          className="btn btn-primary text-left"
+          id="btn_submit1"
+          to={"/alterar_password/" + data.id}
+        >
+          <span className="csSpanBut">Alterar palavra-passe</span>
+        </Link>
+      );
+    });
+  }
+
   render() {
     return (
       <div>
-        {/*ELIMINAR NAVBAR PARA NAO DUPLICAR AO INTERAGIR*/}
+        {navbar_render.loadNav()}
         {/* Formulário */}
         <main className="perfil_utente">
           <div className="container-fluid">
@@ -18,8 +63,7 @@ class PerfilUtente extends React.Component {
                 style={{ backgroundColor: "rgb(255, 255, 255)" }}
               >
                 <p style={{ paddingLeft: "10px" }}>
-                  {" "}
-                  <br /> <br /> <br />{" "}
+                  <br/> <br/> <br/>
                 </p>
               </div>
             </div>
@@ -90,20 +134,21 @@ class PerfilUtente extends React.Component {
                     type="button"
                     className="btn btn-primary text-left"
                     id="btn_submit1"
-                    to={"/alterar_password"}
+                    to={"/alterar_password/"}
                   >
                     <span className="csSpanBut">Alterar palavra-passe</span>
                   </Link>
                 </div>
                 <div className="col-lg-1 mx-3"></div>
                 <div className="col-lg-4">
-                  <button
+                  <Link
                     type="button"
                     className="btn btn-primary text-left"
                     id="btn_submit1"
+                    to={"/qrcode"}
                   >
                     <span className="csSpanBut">Ver QR Code</span>
-                  </button>
+                  </Link>
                 </div>
                 <div className="col-lg-12">&nbsp;</div>
               </div>

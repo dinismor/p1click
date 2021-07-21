@@ -4,6 +4,7 @@ import "bootstrap/dist/js/bootstrap.bundle.min";
 import "bootstrap/dist/css/website.css";
 import { Link } from "react-router-dom";
 import { BsChevronLeft } from "react-icons/bs"; //ICON BOTÃO VOLTAR
+import navbar_render from "./navbar_render";
 
 class RecuperarPass extends React.Component {
   constructor(props) {
@@ -23,23 +24,13 @@ class RecuperarPass extends React.Component {
   render() {
     return (
       <div>
-        <Link
-          type="button"
-          id="btn_submit_bt"
-          class="btn btn-primary"
-          to="../login"
-        >
-          <BsChevronLeft />
-          &nbsp;Voltar
-        </Link>
+        {navbar_render.loadNav()}
         <div className="global-container">
           <div className="login-form">
             <div className="body">
               <img src="img/logo.png" className="img-fluid" alt="Logo" />
               <h5 className="card-title text-center">Centro de Saúde</h5>
-              {/*<div class="alert alert-danger alert-dismissible fade show" role="alert">Incorrect username or password.</div> */}
-              <form>
-                {/* to error: add class "has-danger" */}
+              <form id="ocupai">
                 <div className="form-group">
                   <label htmlFor="exampleInputEmail1">E-mail</label>
                   <input
@@ -67,7 +58,6 @@ class RecuperarPass extends React.Component {
             </div>
           </div>
         </div>
-        {/* Footer */}
         <footer className="bg-light text-center text-lg-start csFooter">
           {/* Copyright */}
           <div className="text-light text-center p-3">

@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-//import MetaTags from "react-meta-tags";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import "bootstrap/dist/css/website.css";
@@ -13,8 +12,6 @@ class AdminEndConsulta extends Component {
   render() {
     return (
       <div className="container-fluid tudo">
-
-
         <div class="row">
           <aside className="aside_medico col-2 px-0 ">
             <p className="medico">
@@ -35,8 +32,7 @@ class AdminEndConsulta extends Component {
               <div className="box_selected_medico">
                 <Link className="selected_medico" to={"/admin_lista_utentes"}>
                   Lista de Utentes
-                </Link>{" "}
-                {/* CLICAR DUAS VEZES PARA VER PÁGINA POR CAUSA DE PÁGINA TESTE NA NAVBAR SAIR */}
+                </Link>
               </div>
             </a>
 
@@ -56,8 +52,7 @@ class AdminEndConsulta extends Component {
               <div className="box_selection_medico">
                 <Link className="selection_medico" to={"/admin_end_consulta"}>
                   Sair
-                </Link>{" "}
-                {/* TESTE DE PÁGINA */}
+                </Link>
               </div>
             </a>
           </aside>

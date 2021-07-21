@@ -3,7 +3,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import axios from "axios";
 import { Link } from "react-router-dom";
-//import MetaTags from "react-meta-tags";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import "sweetalert2/src/sweetalert2.scss";
 
@@ -42,14 +41,14 @@ class AdminConsultaEditDelete extends React.Component {
                 <div className="box_selected_medico">
                   <Link className="selected_medico" to={"/admin_lista_utentes"}>
                     Lista de Utentes
-                  </Link>{" "}
-                  {/* CLICAR DUAS VEZES PARA VER PÁGINA POR CAUSA DE PÁGINA TESTE NA NAVBAR SAIR */}
+                  </Link>
                 </div>
               </a>
-
               <a href="#">
-                <div className="box_selection_medico">
-                  <span className="selection_medico">Editar Utente</span>
+                <div className="box_selection_medico ">
+                  <Link className="selection_medico" to={"/admin_utentes"}>
+                    Editar Utente
+                  </Link>
                 </div>
               </a>
 
@@ -61,10 +60,9 @@ class AdminConsultaEditDelete extends React.Component {
 
               <a href="#">
                 <div className="box_selection_medico">
-                  <Link className="selection_medico" to={"/admin_end_consulta"}>
+                  <Link className="selection_medico" to={"/medico_sair"}>
                     Sair
-                  </Link>{" "}
-                  {/* TESTE DE PÁGINA */}
+                  </Link>
                 </div>
               </a>
             </aside>
@@ -78,7 +76,11 @@ class AdminConsultaEditDelete extends React.Component {
                   <div id="Sto_medico">
                     <span>Sátão</span>
                   </div>
-                  <span className="administracao_medico">Administração</span>
+                  <div className="administracao_medico">
+                    <Link className=" btn-info btn_lt" to={"/Administrador"}>
+                      Administrador
+                    </Link>
+                  </div>
                 </div>
               </div>
             </div>
@@ -86,7 +88,6 @@ class AdminConsultaEditDelete extends React.Component {
           {/* FIM MENU ADMIN*/}
           <div className="col-10 offset-2 ">
             <div className="row mb-5">
-              <div className="shadow-sm_admin p-3 mb-5">15 minutos</div>{" "}
               {/* ADICIONAR TEMPO DE ESPERA */}
               <table className="table table-striped">
                 <thead className="table-light">
@@ -104,7 +105,10 @@ class AdminConsultaEditDelete extends React.Component {
           </div>
           <br></br>
           {/* Footer */}
-          <footer className="bg-light text-center text-lg-start csFooter">
+          <footer
+            className="bg-light text-center text-lg-start csFooter"
+            id="barra_fundo_baixo"
+          >
             {/* Copyright */}
             <div className="text-light text-center p-3">
               powered by:
@@ -124,20 +128,20 @@ class AdminConsultaEditDelete extends React.Component {
     return this.state.consulta_lista.map((data, index) => {
       return (
         <tr key={index}>
-          <td>{data.id_consulta}</td>
+          <td>{data.id}</td>
           <td>{data.tipo_consulta}</td>
           <td>{data.dia_consulta}</td>
           <td>{data.hora_consulta}</td>
           <Link
-            className="btn_ btn-info"
-            to={"/admin_editar_consulta/" + data.id_consulta}
+            className="btn_eeedit btn-info"
+            to={"/admin_editar_consulta/" + data.id}
           >
             Editar
           </Link>
 
           <button
-            className="btn_ btn-danger"
-            onClick={() => this.onDelete(data.id_consulta)}
+            className="btn_eeedit btn-danger"
+            onClick={() => this.onDelete(data.id)}
           >
             Eliminar
           </button>
@@ -164,34 +168,19 @@ class AdminConsultaEditDelete extends React.Component {
   }
 
   onDelete(id) {
-    Swal.fire({
-      title: "Pretende eliminar a Consulta?",
-      text: "No final da operação a consulta será definitivamente cancelada!",
-      type: "warning",
-      showCancelButton: true,
-      confirmButtonText: "Confirmar",
-      cancelButtonText: "Cancelar",
-    }).then((result) => {
-      if (result.value) {
-        this.sendDelete(id);
-      } else if (result.dismiss === Swal.DismissReason.cancel) {
-        Swal.fire("Cancelada", "A sua consulta continua marcada", "error");
-      }
-    });
+    this.sendDelete(id);
   }
-  sendDelete(id_consulta) {
+
+  sendDelete(id) {
     // url do backend
     const baseUrl = "http://localhost:3000/consulta/delete";
     // network
     axios
       .post(baseUrl, {
-        id: id_consulta,
+        id: id,
       })
       .then((response) => {
-        if (response.data.success) {
-          Swal.fire("Eliminada", "A sua consulta foi cancelada.", "success");
-          this.loadConsulta();
-        }
+        this.loadConsulta();
       })
       .catch((error) => {
         alert("Error 325 ");

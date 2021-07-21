@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-//import MetaTags from "react-meta-tags";
+import MetaTags from "react-meta-tags";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import "bootstrap/dist/css/website.css";
+import Swal from "sweetalert2/dist/sweetalert2.js";
+import "sweetalert2/src/sweetalert2.scss";
 
 class AdminListaUtentes extends Component {
   constructor(props) {
@@ -14,26 +16,18 @@ class AdminListaUtentes extends Component {
     };
   }
   componentDidMount() {
-    const url = "http://localhost:3000/utente/list_utente";
-    axios
-      .get(url)
-      .then((res) => {
-        if (res.data.success) {
-          const data = res.data.data;
-          this.setState({ utente_lista: data });
-        } else {
-          alert("Error Web Service!");
-        }
-      })
-      .catch((error) => {
-        alert(error);
-      });
+    this.loadUtente();
   }
 
   render() {
     return (
       <div className="container-fluid tudo">
-
+        <MetaTags>
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+          />
+        </MetaTags>
 
         <div class="row">
           <aside className="aside_medico col-2 px-0 ">
@@ -55,14 +49,15 @@ class AdminListaUtentes extends Component {
               <div className="box_selected_medico ">
                 <Link className="selected_medico" to={"/admin_lista_utentes"}>
                   Lista de Utentes
-                </Link>{" "}
-                {/* CLICAR DUAS VEZES PARA VER PÁGINA POR CAUSA DE PÁGINA TESTE NA NAVBAR SAIR */}
+                </Link>
               </div>
             </a>
 
             <a href="#">
               <div className="box_selection_medico ">
-                <span className="selection_medico">Editar Utente</span>
+                <Link className="selection_medico" to={"/admin_utentes"}>
+                  Editar Utente
+                </Link>
               </div>
             </a>
 
@@ -74,10 +69,9 @@ class AdminListaUtentes extends Component {
 
             <a href="#">
               <div className="box_selection_medico">
-                <Link className="selection_medico" to={"/admin_end_consulta"}>
+                <Link className="selection_medico" to={"/medico_sair"}>
                   Sair
-                </Link>{" "}
-                {/* TESTE DE PÁGINA */}
+                </Link>
               </div>
             </a>
           </aside>
@@ -91,7 +85,11 @@ class AdminListaUtentes extends Component {
                 <div id="Sto_medico">
                   <span>Sátão</span>
                 </div>
-                <span className="administracao_medico">Administração</span>
+                <div className="administracao_medico">
+                  <Link className=" btn-info btn_lt" to={"/Administrador"}>
+                    Administrador
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
@@ -114,7 +112,10 @@ class AdminListaUtentes extends Component {
               </table>
               <br></br>
               {/* Footer */}
-              <footer className="bg-light text-center text-lg-start csFooter">
+              <footer
+                className="bg-light text-center text-lg-start csFooter"
+                id="barra_fundo_baixo"
+              >
                 {/* Copyright */}
                 <div className="text-light text-center p-3">
                   powered by:
@@ -136,39 +137,71 @@ class AdminListaUtentes extends Component {
     return this.state.utente_lista.map((data, index) => {
       return (
         <tr key={index}>
-          <td>{data.id_utente}</td>
+          <td>{data.id}</td>
           <td>{data.nome}</td>
           <td>{data.apelido}</td>
           <td>
-            <Link className="btn_lt btn-warning" to={"/admin_marcar_consulta"}>
+            <Link
+              className="btn_lt btn-warning"
+              id="marcar_marcar"
+              to={"/admin_marcar_consulta"}
+            >
               Marcar
             </Link>
             <Link
               className="btn_lt btn-info"
-              to={"/admin_lista_consulta_edit_delete"}
+              to="admin_lista_consulta_edit_delete"
             >
               Visualizar
             </Link>
-            <Link
-              className="btn_lt btn-danger"
-              to={"/admin_editar_consulta/" + "data.id_utente"}
+            <button
+              className="btn_ btn-danger"
+              onClick={() => this.onDelete(data.id)}
             >
               Eliminar
-            </Link>
+            </button>
           </td>
-          {/* OVERLAY SE DESEJA ELIMINAR UTENTE*/}
           <td></td>
-          {/*<td>{data.email}</td>
-                    <td>{data.data_nascimento}</td>
-                     <td>{data.localidade}</td>
-                     <td>{data.codigo_postal}</td>
-                     <td>{data.telefone}</td>
-                     <td>{data.prioritario}</td>
-                     <td>{data.autonomo}</td>
-                     <td>{data.n_utente_saude}</td>*/}
         </tr>
       );
     });
+  }
+
+  loadUtente() {
+    const url = "http://localhost:3000/utente/list_utente";
+    axios
+      .get(url)
+      .then((res) => {
+        if (res.data.success) {
+          const data = res.data.data;
+          this.setState({ utente_lista: data });
+        } else {
+          alert("Error Web Service!");
+        }
+      })
+      .catch((error) => {
+        alert(error);
+      });
+  }
+
+  onDelete(id) {
+    this.sendDelete(id);
+  }
+
+  sendDelete(id) {
+    // url do backend
+    const baseUrl = "http://localhost:3000/utente/delete_utente";
+    // network
+    axios
+      .post(baseUrl, {
+        id: id,
+      })
+      .then((response) => {
+        this.loadUtente();
+      })
+      .catch((error) => {
+        alert("Error 325 ");
+      });
   }
 }
 

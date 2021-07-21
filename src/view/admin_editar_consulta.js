@@ -2,8 +2,7 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import axios from "axios";
-//import MetaTags from "react-meta-tags";
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const baseUrl = "http://localhost:3000";
 
@@ -20,8 +19,8 @@ class AdminConsultaEdit extends React.Component {
     };
   }
   componentDidMount() {
-    let id_consulta = this.props.match.params.id;
-    const url = baseUrl + "/consulta/get/" + id_consulta;
+    let id = this.props.match.params.id;
+    const url = baseUrl + "/consulta/get/" + id;
     axios
       .get(url)
       .then((res) => {
@@ -35,7 +34,14 @@ class AdminConsultaEdit extends React.Component {
             campdia_consulta: data.dia_consulta,
             camputente_prioritario: data.utente_prioritario,
           });
-          console.log(JSON.stringify(data.camptipo_consulta, data.hora_consulta, data.dia_consulta, data.utente_prioritario))
+          console.log(
+            JSON.stringify(
+              data.camptipo_consulta,
+              data.hora_consulta,
+              data.dia_consulta,
+              data.utente_prioritario
+            )
+          );
         } else {
           alert("Error web service");
         }
@@ -47,8 +53,6 @@ class AdminConsultaEdit extends React.Component {
   render() {
     return (
       <div className="container-fluid tudo">
-        
-
         <div class="row">
           <aside className="aside_medico col-2 px-0 ">
             <p className="medico">
@@ -64,34 +68,28 @@ class AdminConsultaEdit extends React.Component {
                 </Link>
               </div>
             </a>
-
             <a href="#">
               <div className="box_selected_medico">
                 <Link className="selected_medico" to={"/admin_lista_utentes"}>
                   Lista de Utentes
-                </Link>{" "}
-                {/* CLICAR DUAS VEZES PARA VER PÁGINA POR CAUSA DE PÁGINA TESTE NA NAVBAR SAIR */}
+                </Link>
               </div>
             </a>
-
             <a href="#">
               <div className="box_selection_medico">
                 <span className="selection_medico">Editar Utente</span>
               </div>
             </a>
-
             <a href="#">
               <div className="box_selection_medico">
                 <span className="selection_medico">Gerir Atrasos</span>
               </div>
             </a>
-
             <a href="#">
               <div className="box_selection_medico">
                 <Link className="selection_medico" to={"/admin_end_consulta"}>
                   Sair
-                </Link>{" "}
-                {/* TESTE DE PÁGINA */}
+                </Link>
               </div>
             </a>
           </aside>
@@ -101,7 +99,6 @@ class AdminConsultaEdit extends React.Component {
               <div className="text-right" id="logo_medico">
                 <span id="CENTRO_DE_SADE_medico">CENTRO DE SAÚDE</span>
                 <br />
-
                 <div id="Sto_medico">
                   <span>Sátão</span>
                 </div>
@@ -127,7 +124,9 @@ class AdminConsultaEdit extends React.Component {
                       placeholder={2110919303}
                       value={this.state.camputente}
                       onChange={(value) =>
-                        this.setState({ camputente: value.target.value })
+                        this.setState({
+                          camputente: value.target.value,
+                        })
                       }
                       id="numero"
                     />
@@ -231,11 +230,12 @@ class AdminConsultaEdit extends React.Component {
       </div>
     );
   }
+
   sendUpdate() {
     //id
-    let id_consulta = this.props.match.params.id;
+    let id = this.props.match.params.id;
     // urlbackend
-    const url = "http://localhost:3000/consulta/update/" + id_consulta;
+    const url = "http://localhost:3000/consulta/update/" + id;
     const datapost = {
       n_utente_saude: this.state.camputente,
       tipo_consulta: this.state.camptipo_consulta,

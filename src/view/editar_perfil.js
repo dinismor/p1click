@@ -2,6 +2,7 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import "bootstrap/dist/css/website.css";
+import navbar_render from "./navbar_render";
 import { Link } from "react-router-dom";
 import { BsChevronLeft } from "react-icons/bs"; //ICON BOTÃO VOLTAR
 
@@ -9,16 +10,7 @@ class EditarPerfil extends React.Component {
   render() {
     return (
       <div>
-        {/*ELIMINAR NAVBAR PARA NAO DUPLICAR AO INTERAGIR*/}
-        <Link
-          type="button"
-          id="btn_submit_bt"
-          class="btn btn-outline-primary"
-          to="../perfil_utente"
-        >
-          <BsChevronLeft />
-          &nbsp;Voltar
-        </Link>
+        {navbar_render.loadNav()}
         {/* Formulário */}
         <main className="container-fluid">
           <div className="row">
@@ -31,8 +23,7 @@ class EditarPerfil extends React.Component {
             <div className="row">
               <div className="col-md-12">
                 <p style={{ paddingLeft: "10px" }}>
-                  {" "}
-                  <br />{" "}
+                  <br />
                 </p>
               </div>
             </div>
@@ -43,7 +34,7 @@ class EditarPerfil extends React.Component {
                   className="rounded"
                   alt="Utente"
                 />
-                <p>José Pinheiro</p>
+                <p>Utente</p>
               </div>
             </div>
           </section>
@@ -153,7 +144,6 @@ class EditarPerfil extends React.Component {
           </div>
         </main>
         <br></br>
-        {/* Footer */}
         <footer className="bg-light text-center text-lg-start csFooter">
           {/* Copyright */}
           <div className="text-light text-center p-3">

@@ -2,6 +2,7 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import "bootstrap/dist/css/website.css";
+import navbar_render from "./navbar_render";
 import { Link } from "react-router-dom";
 import { BsChevronLeft } from "react-icons/bs"; //ICON BOTÃO VOLTAR
 
@@ -9,17 +10,7 @@ class AlterarPassword extends React.Component {
   render() {
     return (
       <div>
-        {/*ELIMINAR NAVBAR PARA NAO DUPLICAR AO INTERAGIR*/}
-        {/* Perfil */}
-        <Link
-          type="button"
-          id="btn_submit_bt"
-          class="btn btn-outline-primary"
-          to="../perfil_utente"
-        >
-          <BsChevronLeft />
-          &nbsp;Voltar
-        </Link>
+        {navbar_render.loadNav()}
         <div className="container-fluid">
           <br></br>
           <div className="container-utente">
@@ -88,7 +79,6 @@ class AlterarPassword extends React.Component {
         <br></br>
         <br></br>
         <br></br>
-        {/* Footer */}
         <footer className="bg-light text-center text-lg-start csFooter">
           {/* Copyright */}
           <div className="text-light text-center p-3">
