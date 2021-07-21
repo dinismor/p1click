@@ -2,7 +2,7 @@
   "name": "website",
   "version": "1.0.0",
   "engines": {
-    "node": "15.30.0"
+    "node": "6.11.1"
   },
   "description": "",
   "main": "index.js",
